@@ -1,0 +1,75 @@
+<div class="container bg-light">
+    <a routerLink="/home" class="btn text-center" style="color: rgb(64, 0, 124)" >
+      ⇐ Go back
+    </a>
+    <div class="row align-items-center">
+      <div class="col-md-4" align="center">
+        <img src="{{ userProfile.picture }}" class="img-fluid" alt="" />
+      </div>
+      <div class="col-md-4">
+        <h5>
+          <b>{{ userProfile.firstName }} {{ userProfile.lastName }}</b>
+        </h5>
+    </div>
+    <div class="col-md-4">
+      <h5>Address</h5>
+      <p>
+        {{ userProfile.location.city }}, {{ userProfile.location.country }},
+        {{ userProfile.location.state }},
+        {{ userProfile.location.street }}
+      </p>
+    </div>
+  </div>
+  <hr />
+  <div class="row" align="center">
+    <div class="card-columns col-md">
+      <div *ngFor="let post of userPosts">
+        <div class="card bg-light">
+          <div class="card-header">
+            <img
+              src="{{ post.owner.picture }}"
+              class="rounded-circle float-left avatar"
+              alt="..."
+              style="width: 30px;"
+            />
+            <b>
+              <a routerLink="/profile/{{ post.owner.id }}">
+                {{ post.owner.firstName }} {{ post.owner.lastName }} 
+              </a>
+            </b>
+          </div>
+          <img
+            class="card-img-top img-fluid"
+            src="{{ post.image }}"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <div *ngFor="let tag of post.tags" class="d-inline p-1">
+              <a class="badge" (click)="getPostByTags(tag,userProfile.id)">{{ tag }}</a>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                {{ post.text }} <a href="{{ post.link }}">{{ post.link }}</a>
+              </li>
+              <li class="list-group-item"> ❤️ {{ post.likes }} Likes</li>
+              <li class="list-group-item">
+                <a
+                  (click)="getComment(post.id)"
+                  >See Comments<br/><br/>
+                </a>
+                <div *ngIf="comments" style="text-align: left;">
+                  <div *ngFor="let comment of comments.data">
+                    <span style="background-color: aliceblue; font-weight: bold;">{{ comment.owner.firstName }}: </span>
+                    <span style="background-color: aliceblue;">{{ comment.message }}</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            {{ post.publishDate | date: "medium" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

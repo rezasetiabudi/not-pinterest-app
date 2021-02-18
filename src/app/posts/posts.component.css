@@ -1,0 +1,24 @@
+*{
+  background-color:honeydew;
+}
+
+div.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+  margin-bottom: 40px;
+  margin-top: 10px;
+}
+
+div.scrollmenu div {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+div.tags {
+    background-color: cornflowerblue;
+    color: cornsilk;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 0 5px;
+}
